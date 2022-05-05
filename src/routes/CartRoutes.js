@@ -36,7 +36,7 @@ carritoRouter.post('/:id/productos', (req, res) => {
     } else {
         res.json({result: 'No se pudo agregar el producto'})
     }
-})
+}) 
 carritoRouter.delete('/:id/productos/:id_prod', (req, res) => {
     let cartID = req.params.id;
     let prodID = req.params.id_prod

@@ -64,20 +64,23 @@ class CartContainer extends Container {
             let element = carritos.find(elem => elem.id == idCarrito);
             if(element) {
                 element.productos.push(producto);
-                carrito = element;
+                let carritosUpdated = carritos.filter(cart => cart.id != idCarrito)
+                carritosUpdated.push({id: element.id, timestamp: element.timestamp, productos: element.productos})
+                this.save(carritosUpdated);
+                console.log(carritosUpdated);
+            } else {
+                console.log('error');
             }
-
-            this.save(carritos)
+        } else {
+            console.log('error2');
         }
-
-        return carrito;
     }
 
     deleteProduct(idCarrito, idProd) {
         let carritos = this.getAll();
         if(carritos.length > 0) {
             let element = carritos.find(elem => elem.id == idCarrito);
-            if(element.productos.length > 0) {
+            if(element) {
                 let producto = element.productos.find(prod => prod.id == idProd) 
                 if(producto) {
                     let productosUpdated = element.productos.filter(elem => elem.id != idProd);
