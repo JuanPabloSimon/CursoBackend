@@ -3,10 +3,10 @@ const express = require('express');
 const { Router } = express;
 const carritoRouter = Router();
 
-const { CartContainer } = require('../models/CartContainer');
-const { ProductContainer } = require('../models/ProductContainer');
-let productsContainer = new ProductContainer();
-let cartContainer = new CartContainer();
+const { CartDaoFile } = require('../daos/carrito/CarritoDaoArchivo');
+const { ProductDaoFile } = require('../daos/productos/ProductosDaoArchivo');
+let productsContainer = new ProductDaoFile();
+let cartContainer = new CartDaoFile();
 
 
 carritoRouter.post('/', (req, res) => {
@@ -18,7 +18,7 @@ carritoRouter.post('/', (req, res) => {
     }
 })
 carritoRouter.delete('/:id', (req, res) => {
-    cartContainer.deleteCart(req.params.id);
+    cartContainer.deleteById(req.params.id);
     res.json({result: `Se elimino el carrito, id: ${req.params.id}`})
 })
 carritoRouter.get('/:id/productos', (req, res) => {

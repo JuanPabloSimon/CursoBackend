@@ -2,8 +2,8 @@ const express = require('express');
 const { Router } = express;
 const productosRouter = Router();
 
-const { ProductContainer } = require('../models/ProductContainer')
-let productsContainer = new ProductContainer();
+const { ProductDaoFile } = require('../daos/productos/ProductosDaoArchivo')
+let productsContainer = new ProductDaoFile();
 
 productosRouter.get('/', (req, res) => {
     let products = productsContainer.getAll();
@@ -27,7 +27,7 @@ productosRouter.put('/:id', (req, res) => {
     let producto = req.body;
 
     if (producto && producto.nombre && producto.descripcion && producto.codigo && producto.precio && producto.stock ) {
-        producto = productsContainer.editProd(req.params.id, producto.nombre, producto.descripcion, producto.codigo, producto.urlIMG, producto.precio, producto.stock);
+        producto = productsContainer.editProd(req.params.id, producto);
         res.json({result: 'producto editado', producto: producto})
     } else {
         res.json({result: 'El producto no pudo ser editado'})

@@ -1,19 +1,15 @@
-const { Container } = require('./Container')
+const { ContainerArchivo } = require('../../containers/ContainerArchivo') 
 
-class CartContainer extends Container {
+class CartDaoFile extends ContainerArchivo {
     constructor   () {
           super('./src/data/carrito.json')
-          let carritos = this.getAll()
+          let carritos = this.getContent()
           this.id = (carritos.length > 0 ) ? carritos.length + 1 : 1;
     }
 
-    getAll() {
-        let carritos = this.getContent();
-        return carritos
-    }
 
     addCart() {
-        let carritos = this.getAll();
+        let carritos = this.getContent();
         let timestamp = Date.now();
         let carrito = {id: this.id, timestamp: timestamp, productos: []};
         carritos.push(carrito);
@@ -22,23 +18,9 @@ class CartContainer extends Container {
         return carrito
     }
 
-    deleteCart(id) {
-        let carritos = this.getAll();
-
-        if (carritos.length > 0) {
-            let element = carritos.find(cart => cart.id == id);
-            if(element) {
-                let cartsUpdated = carritos.filter(prod => prod.id != id)
-
-                this.save(cartsUpdated)
-            } else {
-                console.log('No se encontro el producto');
-            }
-        }
-    }
 
     getAllProducts(id) {
-        let carritos = this.getAll();
+        let carritos = this.getContent();
         let product = null; 
 
         if (carritos.length > 0) {
@@ -57,7 +39,7 @@ class CartContainer extends Container {
     }
 
     addProduct(idCarrito, producto) {
-        let carritos = this.getAll();
+        let carritos = this.getContent();
         let carrito = null;
 
         if(carritos.length > 0) {
@@ -77,7 +59,7 @@ class CartContainer extends Container {
     }
 
     deleteProduct(idCarrito, idProd) {
-        let carritos = this.getAll();
+        let carritos = this.getContent();
         if(carritos.length > 0) {
             let element = carritos.find(elem => elem.id == idCarrito);
             if(element) {
@@ -101,4 +83,4 @@ class CartContainer extends Container {
     }
 }
 
-module.exports = { CartContainer }
+module.exports = { CartDaoFile }
