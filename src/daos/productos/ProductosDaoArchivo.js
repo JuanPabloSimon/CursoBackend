@@ -7,7 +7,7 @@ class ProductDaoFile extends ContainerArchivo {
         this.id = (products.length > 0 ) ? products.length + 1 : 1;
     }
 
-    addProductToCart(data) {
+    addProduct(data) {
         let products = this.getContent();
         let timestamp = Date.now()
         let product = {

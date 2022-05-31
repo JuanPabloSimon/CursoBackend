@@ -12,17 +12,17 @@ const carritoRouter = Router();
 
 /* Guardado en Firebase */
 
-// const { CarritosDaoFire } = require('../daos/carrito/CarritoDaoFirestore')
-// let cartContainer = new CarritosDaoFire();
-// const { ProductosDaoFire } = require('../daos/productos/ProductosDaoFirestore')
-// let productsContainer = new ProductosDaoFire();
+const { CarritosDaoFire } = require('../daos/carrito/CarritoDaoFirestore')
+let cartContainer = new CarritosDaoFire();
+const { ProductosDaoFire } = require('../daos/productos/ProductosDaoFirestore')
+let productsContainer = new ProductosDaoFire();
 
 
 /* Guardado en Mongo */
-const { CarritosDaoMongo } = require('../daos/carrito/CarritoDaoMongo')
-let cartContainer = new CarritosDaoMongo()
-const { ProductosDaoMongo } = require('../daos/productos/ProductosDaoMongo')
-let productsContainer = new ProductosDaoMongo()
+// const { CarritosDaoMongo } = require('../daos/carrito/CarritoDaoMongo')
+// let cartContainer = new CarritosDaoMongo()
+// const { ProductosDaoMongo } = require('../daos/productos/ProductosDaoMongo')
+// let productsContainer = new ProductosDaoMongo()
 
 
 carritoRouter.post('/', async (req, res) => {

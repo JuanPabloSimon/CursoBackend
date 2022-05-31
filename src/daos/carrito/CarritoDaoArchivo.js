@@ -38,7 +38,7 @@ class CartDaoFile extends ContainerArchivo {
         return product
     }
 
-    addProduct(idCarrito, producto) {
+    addProductToCart(idCarrito, producto) {
         let carritos = this.getContent();
         let carrito = null;
 

@@ -17,11 +17,12 @@ class CarritosDaoFire extends ContainerFirestore {
     async getAllProducts(id) {
         let carritos = await this.getContent();
         let product = null; 
-
+        
         if (carritos.length > 0) {
-            let element = this.collection.doc(`${id}`)
+            let element = await this.getById(`${id}`)
             if(element) {
-                product = element.productos;
+                product = element.data.productos;
+                console.log(product);
                 return product
             } else {
                 console.log('No se encontraron productos');
@@ -46,6 +47,8 @@ class CarritosDaoFire extends ContainerFirestore {
 
             carrito.push(producto);
             let carritoUpdated = await this.collection.doc(`${idCarrito}`).update({productos: carrito})
+            console.log(carritoUpdated);
+            return await this.getById(idCarrito);
         } else {
             console.log('error');
         }

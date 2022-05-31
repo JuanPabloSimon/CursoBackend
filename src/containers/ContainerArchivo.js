@@ -53,7 +53,7 @@ class ContainerArchivo {
     }
 
     editData(id, data) {
-        let datos = this.getAll();
+        let datos = this.getContent();
         let dato = null; 
 
         if (datos.length > 0) {

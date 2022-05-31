@@ -12,12 +12,12 @@ const productosRouter = Router();
 
 /* Guardado en Firebase */
 
-// const { ProductosDaoFire } = require('../daos/productos/ProductosDaoFirestore')
-// let productsContainer = new ProductosDaoFire();
+const { ProductosDaoFire } = require('../daos/productos/ProductosDaoFirestore')
+let productsContainer = new ProductosDaoFire();
 
 /* Guardado en Mongo */
-const { ProductosDaoMongo } = require('../daos/productos/ProductosDaoMongo')
-let productsContainer = new ProductosDaoMongo()
+// const { ProductosDaoMongo } = require('../daos/productos/ProductosDaoMongo')
+// let productsContainer = new ProductosDaoMongo()
 
 
 productosRouter.get('/', async (req, res) => {
