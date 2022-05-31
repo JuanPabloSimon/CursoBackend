@@ -52,7 +52,7 @@ class ContainerArchivo {
         }
     }
 
-    editProd(id, data) {
+    editData(id, data) {
         let datos = this.getAll();
         let dato = null; 
 

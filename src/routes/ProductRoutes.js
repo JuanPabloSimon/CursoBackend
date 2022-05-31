@@ -2,39 +2,54 @@ const express = require('express');
 const { Router } = express;
 const productosRouter = Router();
 
-const { ProductDaoFile } = require('../daos/productos/ProductosDaoArchivo')
-let productsContainer = new ProductDaoFile();
 
-productosRouter.get('/', (req, res) => {
-    let products = productsContainer.getAll();
+/* Guardado en archivos */
+
+// Al usar este metodo se debe implementar en la ruta post la funcion addProduct(). de lo contrario dejar save().
+
+// const { ProductDaoFile } = require('../daos/productos/ProductosDaoArchivo')
+// let productsContainer = new ProductDaoFile();
+
+/* Guardado en Firebase */
+
+// const { ProductosDaoFire } = require('../daos/productos/ProductosDaoFirestore')
+// let productsContainer = new ProductosDaoFire();
+
+/* Guardado en Mongo */
+const { ProductosDaoMongo } = require('../daos/productos/ProductosDaoMongo')
+let productsContainer = new ProductosDaoMongo()
+
+
+productosRouter.get('/', async (req, res) => {
+    let products =  await productsContainer.getContent();
     res.json({productos: products});
 })
-productosRouter.get('/:id', (req, res) => {
-    let product = productsContainer.getById(req.params.id);
+productosRouter.get('/:id', async (req, res) => {
+    let product = await productsContainer.getById(req.params.id);
     res.json({producto: product})
 })
-productosRouter.post('/', (req, res) => {
-    let producto = req.body;
+productosRouter.post('/', async (req, res) => {
+    let data = req.body;
 
-    if (producto && producto.nombre && producto.descripcion && producto.codigo && producto.precio && producto.stock ) {
-        producto = productsContainer.addProduct(producto.nombre, producto.descripcion, producto.codigo, producto.urlIMG, producto.precio, producto.stock);
-        res.json({result: 'producto guardado', producto: producto})
+    if (data && data.nombre && data.descripcion && data.codigo && data.precio && data.stock ) {
+        let product = await productsContainer.save(data);
+        res.json({result: 'producto guardado', product: product})
     } else {
         res.json({result: 'El producto no pudo ser guardado'})
     }
 })
-productosRouter.put('/:id', (req, res) => {
-    let producto = req.body;
+productosRouter.put('/:id', async (req, res) => {
+    let data = req.body;
 
-    if (producto && producto.nombre && producto.descripcion && producto.codigo && producto.precio && producto.stock ) {
-        producto = productsContainer.editProd(req.params.id, producto);
+    if (data) {
+        let producto = await productsContainer.editData(req.params.id, data);
         res.json({result: 'producto editado', producto: producto})
     } else {
         res.json({result: 'El producto no pudo ser editado'})
     }
 })
-productosRouter.delete('/:id', (req, res) => {
-    productsContainer.deleteById(req.params.id);
+productosRouter.delete('/:id', async (req, res) => {
+    await productsContainer.deleteById(req.params.id);
     res.json({result: `Producto con id: ${req.params.id} eliminado`});
 })
 

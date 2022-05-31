@@ -44,7 +44,7 @@ class ContainerFirestore {
         return ({status: 'Producto eliminado'})
     }
 
-    async editProd(id, data) {
+    async editData(id, data) {
         let doc = this.collection.doc(`${id}`)
 
         if (doc) { 
