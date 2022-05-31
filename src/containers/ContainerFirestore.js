@@ -14,78 +14,47 @@ class ContainerFirestore {
         console.log(`Base de datos conectada con la collection ${collection}`);
     }
 
-    save(data) {
-        fs.writeFileSync(this.archivo, JSON.stringify(data));
+    async save(data) {
+        let item = await this.collection.doc().create(data)
+        return item;
     }
 
-    getContent() {
-        let data = [];
-
-        try {
-            let info = fs.readFileSync(this.archivo, 'utf-8');
-            data = JSON.parse(info);
-        } catch (error) {
-            this.save(data);
-            console.log(`Se creó el archivo ${this.archivo}`);
-        }
-
-        return data;
+    async getContent() {
+        let result = await this.collection.get()
+        result = result.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data()
+        }))
+        return result;
     }
 
-    getById(id) {
-        let datos = this.getContent();
-        let dato = null; 
-
-        if (datos.length > 0) {
-            let element = datos.find(elem => elem.id == id);
-            if(element) {
-                dato = element;
-            }
-        }
-
-        return dato;
+    async getById(id) {
+        let result = await this.collection.get()
+        result = result.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data()
+        }))
+        let item = result.find(elem => elem.id == id)
+        return item
     }
 
-    deleteById(id) {
-        let datos = this.getContent();
-
-        if (datos.length > 0) {
-            let element = datos.find(elem => elem.id == id);
-            if(element) {
-                let datosUpdated = datos.filter(elem => elem.id != id)
-
-                this.save(datosUpdated)
-            } else {
-                console.log('No se encontro el elemento');
-            }
-        }
+    async deleteById(id) {
+        let doc = this.collection.doc(`${id}`)
+        let item = await doc.delete()
+        return ({status: 'Producto eliminado'})
     }
 
-    editProd(id, data) {
-        let datos = this.getAll();
-        let dato = null; 
+    async editProd(id, data) {
+        let doc = this.collection.doc(`${id}`)
 
-        if (datos.length > 0) {
-            let element = datos.find(elem => elem.id == id);
-            if(element) {
-                dato = element;
-
-                dato = { 
-                    id: dato.id,
-                    timestamp: dato.timestamp,
-                    nombre: data.nombre,
-                    descripcion: data.descripcion,
-                    codigo: data.codigo,
-                    urlIMG: data.urlIMG,
-                    precio: data.precio,
-                    stock: data.stock
-                }
-            }
+        if (doc) { 
+            let item = await doc.update(data)
+            return item;
+        } else {
+            return ({Error: 'no se encontro el elemento'})
         }
 
-        let datosUpdated = datos.filter(elem => elem.id != id);
-        datosUpdated.push(dato);
-        this.save(datosUpdated);
-        return dato;
     }
 }
+
+module.exports = { ContainerFirestore };
