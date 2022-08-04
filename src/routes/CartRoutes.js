@@ -1,70 +1,83 @@
-const { response } = require('express');
-const express = require('express');
+const express = require("express");
 const { Router } = express;
 const carritoRouter = Router();
 
-/* Guardado en archivos */
+// Logger (Log4js)
 
-// const { CartDaoFile } = require('../daos/carrito/CarritoDaoArchivo');
-// const { ProductDaoFile } = require('../daos/productos/ProductosDaoArchivo');
-// let productsContainer = new ProductDaoFile();
-// let cartContainer = new CartDaoFile();
+const log4js = require("log4js");
 
-/* Guardado en Firebase */
-
-const { CarritosDaoFire } = require('../daos/carrito/CarritoDaoFirestore')
-let cartContainer = new CarritosDaoFire();
-const { ProductosDaoFire } = require('../daos/productos/ProductosDaoFirestore')
-let productsContainer = new ProductosDaoFire();
-
+log4js.configure({
+  appenders: {
+    miLoggerConsole: { type: "console" },
+    miLoggerError: { type: "file", filename: "error.log" },
+  },
+  categories: {
+    default: { appenders: ["miLoggerConsole"], level: "info" },
+    fileError: { appenders: ["miLoggerError"], level: "error" },
+  },
+});
+const logger = log4js.getLogger();
+const loggerError = log4js.getLogger("fileError");
 
 /* Guardado en Mongo */
-// const { CarritosDaoMongo } = require('../daos/carrito/CarritoDaoMongo')
-// let cartContainer = new CarritosDaoMongo()
-// const { ProductosDaoMongo } = require('../daos/productos/ProductosDaoMongo')
-// let productsContainer = new ProductosDaoMongo()
+const { CarritosDaoMongo } = require("../daos/carrito/CarritoDaoMongo");
+let cartContainer = new CarritosDaoMongo();
+const { ProductosDaoMongo } = require("../daos/productos/ProductosDaoMongo");
+let productsContainer = new ProductosDaoMongo();
 
+carritoRouter.post("/", async (req, res) => {
+  let carrito = req.body;
 
-carritoRouter.post('/', async (req, res) => {
-    let carrito = req.body
+  if (carrito) {
+    carrito = await cartContainer.addCart();
+    res.json({
+      result: `Se creo el carrito con id: ${carrito.id}`,
+      carrito: carrito,
+    });
+  }
+});
+carritoRouter.delete("/:id", async (req, res) => {
+  await cartContainer.deleteById(req.params.id);
+  res.json({ result: `Se elimino el carrito, id: ${req.params.id}` });
+});
+carritoRouter.get("/:id/productos", async (req, res) => {
+  let carrito = await cartContainer.getAllProducts(req.params.id);
+  res.json({ result: "Producos en carrito", productos: carrito });
+});
 
-    if(carrito) {
-        carrito = await cartContainer.addCart()
-        res.json({result: `Se creo el carrito con id: ${carrito.id}`, carrito: carrito})
+carritoRouter.post("/:id/productos", async (req, res) => {
+  let cartID = req.params.id;
+  let producto = await productsContainer.getById(req.body.id);
+
+  if (cartID && producto) {
+    let productosInCart = await cartContainer.getAllProducts(req.params.id);
+    if (productosInCart) {
+      var isInCart = productosInCart.find((el) => el._id == req.body.id);
     }
-})
-carritoRouter.delete('/:id', async (req, res) => {
-    await cartContainer.deleteById(req.params.id);
-    res.json({result: `Se elimino el carrito, id: ${req.params.id}`})
-})
-carritoRouter.get('/:id/productos', async (req, res) => {
-    let carrito = await cartContainer.getAllProducts(req.params.id);
-    res.json({result:'Producos en carrito', productos: carrito});
-})
-carritoRouter.post('/:id/productos', async (req, res) => {
-    let cartID = req.params.id;
-    let producto = await productsContainer.getById(req.body.id)
-    
-
-    if(cartID && producto) {
-        let carrito = await cartContainer.addProductToCart(cartID, producto);
-
-        res.json({result: 'Producto agregado al carrito', carrito: carrito});
+    if (isInCart) {
+      logger.warn("El producto ya se encuentra en el carrito");
+      res.redirect("/home");
     } else {
-        res.json({result: 'No se pudo agregar el producto'})
+      let carrito = await cartContainer.addProductToCart(cartID, producto);
+      res.redirect("/home");
     }
-}) 
-carritoRouter.delete('/:id/productos/:id_prod', (req, res) => {
-    let cartID = req.params.id;
-    let prodID = req.params.id_prod
+  } else {
+    res.json({ result: "No se pudo agregar el producto" });
+  }
+});
 
-    if(cartID) {
-        let carrito = cartContainer.deleteProduct(cartID, prodID)
+//delete
 
-        res.json({result: 'Producto eliminado', carrito: carrito})
-    } else {
-        res.json({result: 'No se pudo eliminar el producto deseado'})
-    }
-})
+carritoRouter.get("/:id/productos/:id_prod", (req, res) => {
+  let cartID = req.params.id;
+  let prodID = req.params.id_prod;
+  if (cartID) {
+    let carrito = cartContainer.deleteProduct(cartID, prodID);
+
+    res.redirect("/home");
+  } else {
+    logger.error("Error con el pasaje de id de carrito");
+  }
+});
 
 module.exports = carritoRouter;

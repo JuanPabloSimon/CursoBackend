@@ -1,77 +1,92 @@
 const mongoose = require("mongoose");
 
+// Logger
+
+const log4js = require("log4js");
+const { logger } = require("handlebars");
+
+log4js.configure({
+  appenders: {
+    miLoggerConsole: { type: "console" },
+    miLoggerWarn: { type: "file", filename: "warn.log" },
+    miLoggerError: { type: "file", filename: "error.log" },
+  },
+  categories: {
+    default: { appenders: ["miLoggerConsole"], level: "info" },
+    fileError: { appenders: ["miLoggerError"], level: "error" },
+    warnError: { appenders: ["miLoggerWarn"], level: "warn" },
+  },
+});
+const logger = log4js.getLogger();
+const loggerWarn = log4js.getLogger("WarnError");
+const loggerError = log4js.getLogger("fileError");
+
 class ContainerMongo {
-    constructor(modelo) {
-        mongoose.connect('mongodb://localhost:27017/ecommerce', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }, () => console.log('Conectado a la base de datos'));
-        this.modelo = modelo
-    }
+  constructor(modelo) {
+    mongoose.connect(
+      "mongodb://localhost:27017/ecommerce",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      () => logger.info("Conectado a la base de datos")
+    );
+    this.modelo = modelo;
+  }
 
-
-    
-    async save(data) {
-        try {
-            // const documento = new this.modelo.productos(data);
-            let documentSave = await new this.modelo(data).save();
-            console.log(documentSave);
-            return documentSave;
-        } catch(error) {
-            console.log(error);
-        }
+  async save(data) {
+    try {
+      let documentSave = await new this.modelo(data).save();
+      return documentSave;
+    } catch (error) {
+      logger.error(error);
+      loggerError.error(error);
     }
-    
-    async getContent(){
-        try {
-            console.log('Read all');
-            let data = await this.modelo.find({});
-            return data
-        } catch(error) {
-            console.log(error);
-        }
-    }
+  }
 
-    async getById(id){
-        try {
-            console.log('Read by id');
-            let data = await this.modelo.find({_id: id});
-            let objeto = data.find(element => element.id == id)
-            console.log(objeto);
-            return objeto
-        } catch(error) {
-            console.log(error);
-        }
+  async getContent() {
+    try {
+      let data = await this.modelo.find({}).lean();
+      return data;
+    } catch (error) {
+      logger.error(error);
+      loggerError.error(error);
     }
+  }
 
-    async deleteById(id) {
-        try {
-            let dataDelete = await this.modelo.deleteOne(
-                {_id: id}
-            );
-            console.log(dataDelete);
-            return ({status: 'Producto eliminado'})
-        } catch(error) {
-            console.log(error);
-        }
+  async getById(id) {
+    try {
+      let data = await this.modelo.find({ _id: id });
+      let objeto = data.find((element) => element.id == id);
+      return objeto;
+    } catch (error) {
+      logger.error(error);
+      loggerError.error(error);
     }
+  }
 
-    
-
-    async editData(id, data) {
-        try {
-            let dataUpdated = await this.modelo.updateOne(
-                {_id: id},
-                {$set: data}
-            );
-            console.log(dataUpdated);
-            return dataUpdated;
-        } catch (error) {
-            console.log(error);
-        }
-        
+  async deleteById(id) {
+    try {
+      let dataDelete = await this.modelo.deleteOne({ _id: id });
+      return { status: "Producto eliminado" };
+    } catch (error) {
+      logger.error(error);
+      loggerError.error(error);
     }
+  }
+
+  async editData(id, data) {
+    try {
+      let dataUpdated = await this.modelo.updateOne(
+        { _id: id },
+        { $set: data }
+      );
+      return dataUpdated;
+    } catch (error) {
+      logger.error(error);
+      loggerError.error(error);
+    }
+  }
 }
 
-module.exports =  { ContainerMongo }
-
+module.exports = { ContainerMongo };

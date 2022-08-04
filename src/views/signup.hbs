@@ -1,0 +1,105 @@
+<div class="container p-2" style="background-color: #eceef1;">
+  <h2>SignUp</h2>
+  <form action="/uploadImage" method="post" enctype="multipart/form-data">
+    <label for="avatar" class="form-label">Seleccione Imagen Perfil</label>
+    <br />
+    <input
+      type="file"
+      id="avatar"
+      name="myFile"
+      placeholder="Ingrese su Apellido "
+      aria-label="Ingrese su Apellido "
+      aria-describedby="button-addon2"
+    />
+    <button type="submit">Subir imagen</button>
+  </form>
+  <form class="mb-3 w-75" action="/signup" method="post" autocomplete="off">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        aria-describedby="emailHelp"
+        name="username"
+      />
+      <label for="contraseña" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="contraseña"
+        name="password"
+      />
+      <label for="nombre" class="form-label">Nombre</label>
+      <input
+        id="nombre"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese su nombre "
+        aria-label="Ingrese su nombre "
+        aria-describedby="button-addon2"
+        name="firstName"
+      />
+      <label for="apellido" class="form-label">Apellido</label>
+      <input
+        id="apellido"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese su Apellido "
+        aria-label="Ingrese su Apellido "
+        aria-describedby="button-addon2"
+        name="lastName"
+      />
+      <label for="direccion" class="form-label">Direccion</label>
+      <input
+        id="direccion"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese su direccion "
+        aria-label="Ingrese su direccion "
+        aria-describedby="button-addon2"
+        name="adress"
+      />
+      <label for="edad" class="form-label">Edad</label>
+      <input
+        id="edad"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese su edad "
+        aria-label="Ingrese su edad "
+        aria-describedby="button-addon2"
+        name="age"
+      />
+      <div class="container d-flex mt-2 align-items-center">
+        <label for="prefijo" class="p-2">Prefijo internacional</label>
+        <input
+          id="prefijo"
+          type="text"
+          class="form-control"
+          placeholder="Ej. +54"
+          aria-label="Ingrese su numero telefónico "
+          aria-describedby="button-addon2"
+          name="codeInt"
+        />
+        <label for="numeroTel" class="p-2">Numero telefónico</label>
+        <input
+          id="numeroTel"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese su numero telefónifo "
+          aria-label="Ingrese su numero telefónico "
+          aria-describedby="button-addon2"
+          name="phone"
+        />
+
+      </div>
+      <div class="mt-3">
+        <button class="btn btn-outline-dark" type="submit" id="button-addon2">
+          Enviar
+        </button>
+        <a href="/login" class="text-decoration-none btn btn-outline-dark">Tengo
+          Cuenta, ir al Login</a>
+      </div>
+    </div>
+  </form>
+</div>

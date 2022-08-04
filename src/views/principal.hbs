@@ -1,0 +1,95 @@
+<div
+  class="container p-2 mt-3"
+  style="background-color: #C5E1D4; border-radius:4.8px;"
+>
+  <nav
+    class="navbar navbar-expand-lg navbar-light"
+    style="justify-content: space-between;"
+  >
+    <h2>
+      Bienvenido
+      {{usuario}}</h2>
+    <a
+      href="/logout"
+      class="text-decoration-none btn btn-outline-dark"
+    >Desloguear</a>
+  </nav>
+</div>
+<div class="container">
+  <div class="row">
+    <aside
+      class="col d-flex flex-column align-items-center"
+      style="background-color: rgba(100, 143, 60, 0.5);"
+    >
+      <h2 class="p-2">Perfil</h2>
+      <div
+        class="card d-flex flex-column align-items-center"
+        style="width: 80%;"
+      >
+        <img src={{avatar}} class="card-img-top" alt="avatar" />
+        <div class="card-body">
+          <p class="card-text">{{usuario}}</p>
+          <p class="card-text">{{email}}</p>
+        </div>
+      </div>
+    </aside>
+    <section
+      class="col-6 d-flex flex-column align-items-center"
+      style="background-color: rgba(143, 84, 60, 0.5);"
+    >
+      <h2 class="p-2">Productos</h2>
+      {{#each productos}}
+        <div class="card m-2" style="width: 16rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{this.nombre}}</h5>
+            <p class="card-text"> {{this.descripcion}}</p>
+            <strong> ${{this.precio}}</strong>
+            <form
+              action="/api/carrito/{{this.cartId}}/productos"
+              method="post"
+              style="margin-top: 1em;"
+            >
+              <input
+                type="text"
+                value={{this._id}}
+                name="id"
+                style="display: none;"
+              />
+              <button type="submit" class="btn btn-primary">Agregar Al Carrito</button>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    </section>
+    <aside
+      id="productos"
+      class="col d-flex flex-column align-items-center"
+      style="background-color: rgba(26, 24, 141, 0.5);"
+    >
+      <h2 class="p-2">Carrito</h2>
+      {{#each cartProducts}}
+        <div class="card m-2" style="width: 16rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{this.nombre}}</h5>
+            <strong class="card-text">${{this.precio}}</strong>
+            <form
+              action="/api/carrito/{{this.cartId}}/productos/{{this._id}}"
+              method="get"
+            >
+              <input
+                type="text"
+                value={{this._id}}
+                name="id"
+                style="display: none;"
+              />
+              <button type="submit" class="btn btn-primary">Eliminar del Carrito</button>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+      <form action="/enviar" method="post">
+        <button type="submit" class="btn btn-danger">Finalizar Compra</button>
+      </form>
+    </aside>
+  </div>
+</div>
