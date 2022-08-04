@@ -5,7 +5,6 @@ const carritoModel = require("../../models/carritos");
 // Logger (Log4js)
 
 const log4js = require("log4js");
-const { logger } = require("handlebars");
 
 log4js.configure({
   appenders: {

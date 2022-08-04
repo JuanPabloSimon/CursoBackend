@@ -152,7 +152,6 @@ app.use(express.urlencoded({ extended: true }));
 // Multer
 const fs = require("fs");
 const multer = require("multer");
-const { logger } = require("handlebars");
 const upload = multer({ dest: "public/assets/" });
 
 // Rutas

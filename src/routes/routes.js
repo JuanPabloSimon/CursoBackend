@@ -57,6 +57,7 @@ async function sendGmailBuyer(productos, usuario) {
   };
   try {
     const info = await transporter.sendMail(mailOptions);
+    logger.info(info);
   } catch (error) {
     logger.error(error);
     loggerError.error(error);
@@ -85,6 +86,7 @@ async function sendGmailAdmin(productos, usuario) {
   };
   try {
     const info = await transporter.sendMail(mailOptions);
+    logger.info(info);
   } catch (error) {
     logger.error(error);
     loggerError.error(error);

@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 // Logger
 
 const log4js = require("log4js");
-const { logger } = require("handlebars");
 
 log4js.configure({
   appenders: {
@@ -18,7 +17,6 @@ log4js.configure({
   },
 });
 const logger = log4js.getLogger();
-const loggerWarn = log4js.getLogger("WarnError");
 const loggerError = log4js.getLogger("fileError");
 
 class ContainerMongo {
