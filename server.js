@@ -7,6 +7,31 @@ const PORT = process.env.PORT || 8080;
 
 const routes = require("./src/routes/routes");
 
+// Inicializando
+
+const cluster = require("cluster");
+const MODE = process.env.MODE || "fork";
+
+if (MODE === "cluster") {
+  if (cluster.isPrimary) {
+    for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+    }
+    cluster.on("exit", (worker, code, signal) => {
+      console.log(`worker ${worker.process.pid} died`);
+      cluster.fork();
+    });
+  } else {
+    app.listen(PORT, () => {
+      logger.info(`Server corriendo en puerto: ${PORT} en modo cluster`);
+    });
+  }
+} else {
+  app.listen(PORT, () => {
+    logger.info("Server escuchando en puerto 8080");
+  });
+}
+
 // Logger (Log4js)
 
 const log4js = require("log4js");
@@ -224,8 +249,4 @@ app.get("/home", routes.checkAuthentication, async (req, res) => {
     productos: products,
     cartProducts: productsInCart,
   });
-});
-
-app.listen(PORT, () => {
-  logger.info("Server escuchando en puerto 8080");
 });
