@@ -3,6 +3,7 @@ const app = express();
 const carritoRouter = require("./src/routes/CartRoutes");
 const productosRouter = require("./src/routes/ProductRoutes");
 const handlebars = require("express-handlebars");
+const PORT = process.env.PORT || 8080;
 
 const routes = require("./src/routes/routes");
 
@@ -225,6 +226,6 @@ app.get("/home", routes.checkAuthentication, async (req, res) => {
   });
 });
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
   logger.info("Server escuchando en puerto 8080");
 });
