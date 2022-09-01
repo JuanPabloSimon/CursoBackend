@@ -180,11 +180,80 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ dest: "public/assets/" });
 
+//Graphql
+const { graphqlHTTP } = require("express-graphql");
+const { buildSchema } = require("graphql");
+const schema = buildSchema(`
+  type Producto {
+    nombre: String!
+    descripcion: String!
+    codigo: Int!
+    urlIMG: String
+    precio: Int!
+    stock: Int!
+  }
+  input ProductoInput {
+    nombre: String!
+    descripcion: String!
+    codigo: Int!
+    urlIMG: String
+    precio: Int!
+    stock: Int!
+  }
+  type Query {
+    getProducts: [Producto]
+    getById(id: Int!): Producto
+  }
+  type Mutation {
+    createProduct(datos: ProductoInput): Producto
+    updateProduct(id: Int!, datos: ProductoInput): Producto
+    deleteProduct(id: Int!): Producto
+  }
+`);
+
+async function getProducts() {
+  let response = await productsContainer.getContent();
+  return response;
+}
+
+async function getById(id) {
+  let response = await productsContainer.getById(id);
+  return response;
+}
+
+async function createProduct(datos) {
+  let response = await productsContainer.save(datos);
+  return response;
+}
+
+async function updateProduct(id, datos) {
+  let response = await productsContainer.editData(id, datos);
+  return response;
+}
+
+async function deleteProduct(id) {
+  let response = await productsContainer.deleteById(id);
+  return response;
+}
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: {
+      getProducts,
+      getById,
+      updateProduct,
+      createProduct,
+      deleteProduct,
+    },
+    graphiql: true,
+  })
+);
+
 // Rutas
 
 app.use("/api/productos", productosRouter);
 app.use("/api/carrito", carritoRouter);
-
 // Inicio
 
 app.get("/", routes.getRoot);
