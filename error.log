@@ -1,0 +1,500 @@
+[2022-09-23T10:42:31.715] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-23T10:42:31.737] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-23T11:43:57.916] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-23T11:43:57.921] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-26T12:26:12.750] [ERROR] fileError - Error: mensajes validation failed: fecha: Cast to Number failed for value "26/9/2022" (type string) at path "fecha", hora: Cast to Number failed for value "12:26:12" (type string) at path "hora", email: Path `email` is required., tipo: Path `tipo` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    fecha: CastError: Cast to Number failed for value "26/9/2022" (type string) at path "fecha"
+        at SchemaNumber.cast (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schema\number.js:378:11)
+        at SchemaNumber.SchemaType.applySetters (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1189:12)
+        at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1409:20)
+        at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1137:16)
+        at model.Document (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:162:12)
+        at model.Model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:115:12)
+        at new model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:4825:15)
+        at MensajesDaoMongo.save (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\src\containers\ContainerMongo.js:37:32)
+        at Socket.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\server.js:211:22)
+        at Socket.emit (events.js:400:28) {
+      stringValue: '"26/9/2022"',
+      messageFormat: undefined,
+      kind: 'Number',
+      value: '26/9/2022',
+      path: 'fecha',
+      reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+      
+        assert.ok(!isNaN(val))
+      
+          at castNumber (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\cast\number.js:27:10)
+          at SchemaNumber.cast (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schema\number.js:376:12)
+          at SchemaNumber.SchemaType.applySetters (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1189:12)
+          at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1409:20)
+          at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1137:16)
+          at model.Document (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:162:12)
+          at model.Model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:115:12)
+          at new model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:4825:15)
+          at MensajesDaoMongo.save (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\src\containers\ContainerMongo.js:37:32)
+          at Socket.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\server.js:211:22) {
+        generatedMessage: true,
+        code: 'ERR_ASSERTION',
+        actual: false,
+        expected: true,
+        operator: '=='
+      },
+      valueType: 'string'
+    },
+    hora: CastError: Cast to Number failed for value "12:26:12" (type string) at path "hora"
+        at SchemaNumber.cast (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schema\number.js:378:11)
+        at SchemaNumber.SchemaType.applySetters (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1189:12)
+        at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1409:20)
+        at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1137:16)
+        at model.Document (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:162:12)
+        at model.Model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:115:12)
+        at new model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:4825:15)
+        at MensajesDaoMongo.save (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\src\containers\ContainerMongo.js:37:32)
+        at Socket.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\server.js:211:22)
+        at Socket.emit (events.js:400:28) {
+      stringValue: '"12:26:12"',
+      messageFormat: undefined,
+      kind: 'Number',
+      value: '12:26:12',
+      path: 'hora',
+      reason: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+      
+        assert.ok(!isNaN(val))
+      
+          at castNumber (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\cast\number.js:27:10)
+          at SchemaNumber.cast (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schema\number.js:376:12)
+          at SchemaNumber.SchemaType.applySetters (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1189:12)
+          at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1409:20)
+          at model.$set (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:1137:16)
+          at model.Document (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:162:12)
+          at model.Model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:115:12)
+          at new model (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\model.js:4825:15)
+          at MensajesDaoMongo.save (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\src\containers\ContainerMongo.js:37:32)
+          at Socket.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\server.js:211:22) {
+        generatedMessage: true,
+        code: 'ERR_ASSERTION',
+        actual: false,
+        expected: true,
+        operator: '=='
+      },
+      valueType: 'string'
+    },
+    email: ValidatorError: Path `email` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'email',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    tipo: ValidatorError: Path `tipo` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'tipo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'mensajes validation failed'
+}
+[2022-09-26T12:28:32.495] [ERROR] fileError - Error: mensajes validation failed: email: Path `email` is required., tipo: Path `tipo` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    email: ValidatorError: Path `email` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'email',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    tipo: ValidatorError: Path `tipo` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'tipo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'mensajes validation failed'
+}
+[2022-09-26T12:29:39.470] [ERROR] fileError - Error: mensajes validation failed: email: Path `email` is required., tipo: Path `tipo` is required., mensaje: Path `mensaje` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    email: ValidatorError: Path `email` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'email',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    tipo: ValidatorError: Path `tipo` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'tipo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    mensaje: ValidatorError: Path `mensaje` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'mensaje',
+      value: '',
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'mensajes validation failed'
+}
+[2022-09-26T12:29:45.705] [ERROR] fileError - Error: mensajes validation failed: email: Path `email` is required., tipo: Path `tipo` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    email: ValidatorError: Path `email` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'email',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    tipo: ValidatorError: Path `tipo` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'tipo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'mensajes validation failed'
+}
+[2022-09-26T12:42:55.484] [ERROR] fileError - Error: mensajes validation failed: email: Path `email` is required., tipo: Path `tipo` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    email: ValidatorError: Path `email` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'email',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    tipo: ValidatorError: Path `tipo` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'tipo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'mensajes validation failed'
+}
+[2022-09-26T13:18:22.537] [ERROR] fileError - Error: mensajes validation failed: tipo: Path `tipo` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    tipo: ValidatorError: Path `tipo` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'tipo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'mensajes validation failed'
+}
+[2022-09-26T13:19:39.169] [ERROR] fileError - Error: mensajes validation failed: tipo: Path `tipo` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    tipo: ValidatorError: Path `tipo` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'tipo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'mensajes validation failed'
+}
+[2022-09-26T20:02:01.424] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-26T20:02:01.440] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-26T20:37:15.714] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-26T20:37:15.724] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-27T09:59:23.725] [ERROR] fileError - Error: ordenes validation failed: emailBuyer: Path `emailBuyer` is required., estado: Path `estado` is required., numOrden: Path `numOrden` is required., timestamp: Path `timestamp` is required.
+    at ValidationError.inspect (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\error\validation.js:48:26)
+    at formatValue (internal/util/inspect.js:743:19)
+    at inspect (internal/util/inspect.js:317:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1976:40)
+    at Object.format (internal/util/inspect.js:1850:10)
+    at basicLayout (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\log4js\lib\log4js.js:42:21) {
+  errors: {
+    emailBuyer: ValidatorError: Path `emailBuyer` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'emailBuyer',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    estado: ValidatorError: Path `estado` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'estado',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    numOrden: ValidatorError: Path `numOrden` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaNumber.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'numOrden',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    timestamp: ValidatorError: Path `timestamp` is required.
+        at validate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1330:13)
+        at SchemaNumber.SchemaType.doValidate (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\schematype.js:1314:7)
+        at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\mongoose\lib\document.js:2751:18
+        at processTicksAndRejections (internal/process/task_queues.js:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'timestamp',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'ordenes validation failed'
+}
+[2022-09-27T12:59:07.944] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-27T13:03:46.656] [ERROR] fileError - Error: invalid_grant: Bad Request
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}

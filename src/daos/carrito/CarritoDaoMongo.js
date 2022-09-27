@@ -25,9 +25,14 @@ class CarritosDaoMongo extends ContainerMongo {
     this.id = carritos.length > 0 ? carritos.length + 1 : 1;
   }
 
-  async addCart(id) {
+  async addCart(id, direccion) {
     let timestamp = Date.now();
-    let carrito = { timestamp: timestamp, cartId: id, productos: [] };
+    let carrito = {
+      timestamp: timestamp,
+      cartId: id,
+      productos: [],
+      direccion: direccion,
+    };
     this.save(carrito);
     return carrito._id;
   }
@@ -56,12 +61,39 @@ class CarritosDaoMongo extends ContainerMongo {
       { productos: 1 }
     );
     if (item) {
-      let carrito = item.productos;
-      carrito.push(producto);
-      let dataUpdated = await this.modelo.updateOne(
-        { cartId: idCarrito },
-        { $set: { productos: carrito } }
-      );
+      let productosInCart = await this.getAllProducts(idCarrito);
+      if (productosInCart.length > 0) {
+        var isInCart = productosInCart.find(
+          (el) => el.nombre == producto.nombre
+        );
+        if (isInCart) {
+          let cantidad = isInCart.cantidad;
+          let newCart = productosInCart.filter(
+            (item) => item.nombre !== producto.nombre
+          );
+          producto = { ...producto, cantidad: cantidad + 1 };
+          newCart.push(producto);
+          let dataUpdated = await this.modelo.updateOne(
+            { cartId: idCarrito },
+            { $set: { productos: newCart } }
+          );
+          logger.warn("El producto ya se encuentra en el carrito");
+        } else {
+          let carrito = item.productos;
+          carrito.push(producto);
+          let dataUpdated = await this.modelo.updateOne(
+            { cartId: idCarrito },
+            { $set: { productos: carrito } }
+          );
+        }
+      } else {
+        let carrito = item.productos;
+        carrito.push(producto);
+        let dataUpdated = await this.modelo.updateOne(
+          { cartId: idCarrito },
+          { $set: { productos: carrito } }
+        );
+      }
     } else {
       logger.error("Error al buscar carrito");
     }

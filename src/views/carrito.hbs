@@ -1,0 +1,40 @@
+<div>
+  <section id="productos" class="col d-flex flex-column align-items-center">
+    <h2 class="p-2">Productos agregados al carrito</h2>
+    <div style="display: grid; grid-template-columns:repeat(3, 1fr);">
+      {{#each cartProducts}}
+        <div
+          class="card m-2 d-flex flex-column align-items-center p-2"
+          style="width: 16rem;"
+        >
+          <img
+            src={{this.image}}
+            alt={{this.nombre}}
+            style="max-width: 200px;"
+          />
+          <div class="card-body d-flex flex-column justify-content-center">
+            <h5 class="card-title">{{this.nombre}}</h5>
+            <strong class="card-text">${{this.precio}}</strong>
+            <p>Cantidad agregada: {{this.cantidad}}</p>
+            <form
+              action="/api/carrito/{{this.cartId}}/productos/{{this._id}}"
+              method="get"
+            >
+              <input
+                type="text"
+                value={{this._id}}
+                name="id"
+                style="display: none;"
+              />
+              <button type="submit" class="btn btn-primary">Eliminar del Carrito</button>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <form class="mt-3" action="/enviar" method="post">
+      <a class="btn btn-success" href="/productos"> Volver a Productos</a>
+      <button type="submit" class="btn btn-danger">Finalizar Compra</button>
+    </form>
+  </section>
+</div>

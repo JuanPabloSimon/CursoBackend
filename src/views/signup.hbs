@@ -1,18 +1,5 @@
 <div class="container p-2" style="background-color: #eceef1;">
   <h2>SignUp</h2>
-  <form action="/uploadImage" method="post" enctype="multipart/form-data">
-    <label for="avatar" class="form-label">Seleccione Imagen Perfil</label>
-    <br />
-    <input
-      type="file"
-      id="avatar"
-      name="myFile"
-      placeholder="Ingrese su Apellido "
-      aria-label="Ingrese su Apellido "
-      aria-describedby="button-addon2"
-    />
-    <button type="submit">Subir imagen</button>
-  </form>
   <form class="mb-3 w-75" action="/signup" method="post" autocomplete="off">
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
@@ -29,6 +16,13 @@
         class="form-control"
         id="contraseña"
         name="password"
+      />
+      <input
+        type="password"
+        class="form-control"
+        id="contraseña2"
+        name="password2"
+        placeholder="Confirme contraseña"
       />
       <label for="nombre" class="form-label">Nombre</label>
       <input

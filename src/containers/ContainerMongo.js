@@ -19,10 +19,23 @@ log4js.configure({
 const logger = log4js.getLogger();
 const loggerError = log4js.getLogger("fileError");
 
+// DOTENV
+
+const dotenv = require("dotenv");
+const path = require("path");
+const NODE_ENV = process.argv.slice(2);
+dotenv.config({
+  path:
+    NODE_ENV == "production"
+      ? path.resolve(__dirname, "produccion.env")
+      : path.resolve(__dirname, "desarrollo.env"),
+});
+const MONGO_URL = process.env.MONGO_URL;
+
 class ContainerMongo {
   constructor(modelo) {
     mongoose.connect(
-      "mongodb://localhost:27017/ecommerce",
+      MONGO_URL,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

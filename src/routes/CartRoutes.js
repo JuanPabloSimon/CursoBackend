@@ -48,19 +48,19 @@ carritoRouter.get("/:id/productos", async (req, res) => {
 carritoRouter.post("/:id/productos", async (req, res) => {
   let cartID = req.params.id;
   let producto = await productsContainer.getById(req.body.id);
+  let product = {
+    nombre: producto.nombre,
+    codigo: producto.codigo,
+    cantidad: 1,
+    image: producto.urlIMG,
+    precio: producto.precio,
+    _id: producto._id,
+  };
+  console.log(product);
 
-  if (cartID && producto) {
-    let productosInCart = await cartContainer.getAllProducts(req.params.id);
-    if (productosInCart) {
-      var isInCart = productosInCart.find((el) => el._id == req.body.id);
-    }
-    if (isInCart) {
-      logger.warn("El producto ya se encuentra en el carrito");
-      res.redirect("/home");
-    } else {
-      let carrito = await cartContainer.addProductToCart(cartID, producto);
-      res.redirect("/home");
-    }
+  if (cartID && product) {
+    let carrito = await cartContainer.addProductToCart(cartID, product);
+    res.redirect("/productos");
   } else {
     res.json({ result: "No se pudo agregar el producto" });
   }
@@ -74,7 +74,7 @@ carritoRouter.get("/:id/productos/:id_prod", (req, res) => {
   if (cartID) {
     let carrito = cartContainer.deleteProduct(cartID, prodID);
 
-    res.redirect("/home");
+    res.redirect("/carrito");
   } else {
     logger.error("Error con el pasaje de id de carrito");
   }

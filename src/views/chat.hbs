@@ -1,0 +1,34 @@
+<div class="container p-2 mt-3">
+  <nav
+    class="navbar navbar-expand-lg navbar-light"
+    style="justify-content: space-between;"
+  >
+    <h2>
+      Chatea con el local!</h2>
+    <div>
+      <a
+        href="/productos"
+        class="text-decoration-none btn btn-outline-dark"
+      >Productos</a>
+    </div>
+  </nav>
+  <div>
+    <form class="formulario" onsubmit="addMessage(this)">
+      <label for="texto" style="font-weight: bold"> Mensaje </label>
+      <input
+        id="texto"
+        name="text"
+        class="form-control input"
+        type="text"
+        placeholder="Tu mensaje"
+        aria-label="default input example"
+      />
+      <button type="submit" class="btn btn-dark" style="margin-top: 10px">
+        Enviar
+      </button>
+    </form>
+  </div>
+  <div id="messages"></div>
+</div>
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+<script src="./main.js"></script>

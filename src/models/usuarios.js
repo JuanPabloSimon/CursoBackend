@@ -19,9 +19,9 @@ const UsuarioSchema = new mongoose.Schema({
   adress: { type: String, required: true, max: 100 },
   age: { type: Number, required: true },
   cartId: { type: Number, required: true },
-  avatar: { type: String, required: false },
   phoneNumber: { type: Number, required: true },
   whatsApp: { type: Number, required: true },
+  type: { type: String, required: true, max: 100 },
 });
 
 module.exports = mongoose.model(usuariosCollection, UsuarioSchema);

@@ -6,6 +6,7 @@ const CarritoSchema = new mongoose.Schema({
   timestamp: { type: Number, required: true },
   cartId: { type: Number, required: true },
   productos: { type: Array, required: true },
+  direccion: { type: String, required: true },
 });
 
 const carritoModel = mongoose.model(CarrritoCollection, CarritoSchema);

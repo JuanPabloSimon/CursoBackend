@@ -1,17 +1,26 @@
 const express = require("express");
 const app = express();
-const carritoRouter = require("./src/routes/CartRoutes");
-const productosRouter = require("./src/routes/ProductRoutes");
+const { Server: HttpServer } = require("http");
+const { Server: IOServer } = require("socket.io");
+const httpServer = new HttpServer(app);
+const io = new IOServer(httpServer);
 const handlebars = require("express-handlebars");
-const PORT = process.env.PORT || 8080;
+const dotenv = require("dotenv");
+const path = require("path");
+const NODE_ENV = process.argv.slice(2);
+dotenv.config({
+  path:
+    NODE_ENV == "production"
+      ? path.resolve(__dirname, "produccion.env")
+      : path.resolve(__dirname, "desarrollo.env"),
+});
+const PORT = process.env.PORT;
 
-const routes = require("./src/routes/routes");
-
+const { MensajesDaoMongo } = require("./src/daos/mensajes/MensajesDaoMongo");
+let messageContainer = new MensajesDaoMongo();
 // Inicializando
-
 const cluster = require("cluster");
-const MODE = process.env.MODE || "fork";
-
+const MODE = process.env.MODE;
 if (MODE === "cluster") {
   if (cluster.isPrimary) {
     for (let i = 0; i < numCPUs; i++) {
@@ -22,20 +31,17 @@ if (MODE === "cluster") {
       cluster.fork();
     });
   } else {
-    app.listen(PORT, () => {
+    httpServer.listen(PORT, () => {
       logger.info(`Server corriendo en puerto: ${PORT} en modo cluster`);
     });
   }
 } else {
-  app.listen(PORT, () => {
+  httpServer.listen(PORT, () => {
     logger.info("Server escuchando en puerto 8080");
   });
 }
-
 // Logger (Log4js)
-
 const log4js = require("log4js");
-
 log4js.configure({
   appenders: {
     miLoggerConsole: { type: "console" },
@@ -48,16 +54,7 @@ log4js.configure({
 });
 const logger = log4js.getLogger();
 const loggerError = log4js.getLogger("fileError");
-
-// Mongo (Productos)
-
-const { ProductosDaoMongo } = require("./src/daos/productos/ProductosDaoMongo");
-let productsContainer = new ProductosDaoMongo();
-const { CarritosDaoMongo } = require("./src/daos/carrito/CarritoDaoMongo");
-let cartContainer = new CarritosDaoMongo();
-
 // Passport
-
 const session = require("express-session");
 const UserModel = require("./src/models/usuarios");
 const { createHash } = require("./src/utils/hashGenerator");
@@ -65,24 +62,22 @@ const { validatePass } = require("./src/utils/passValidator");
 const { getRandomNumber } = require("./src/utils/getRandomNumber");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-
+const time = parseInt(process.env.TIME_SESSION);
 app.use(
   session({
-    secret: "entregable",
+    secret: "finalProyect",
     cookie: {
       httpOnly: false,
       secure: false,
-      maxAge: 6000000,
+      maxAge: time,
     },
     rolling: true,
     resave: false,
     saveUninitialized: false,
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.use(
   "login",
   new LocalStrategy((username, password, callback) => {
@@ -105,7 +100,6 @@ passport.use(
     });
   })
 );
-
 passport.use(
   "signup",
   new LocalStrategy(
@@ -123,41 +117,66 @@ passport.use(
           return callback(null, false);
         }
 
-        const newUser = {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          username: username,
-          password: createHash(password),
-          adress: req.body.adress,
-          age: req.body.age,
-          avatar: linkAvatar,
-          cartId: getRandomNumber(),
-          phoneNumber: req.body.codeInt + req.body.phone,
-          whatsApp: req.body.codeInt + "9" + req.body.phone,
-        };
+        if (password !== req.body.password2) {
+          logger.warn("Las contraseñas no coinciden");
+          return callback(null, false);
+        }
 
-        UserModel.create(newUser, (err, userWithId) => {
-          if (err) {
-            return callback(err);
-          }
+        if (username === "admin@gmail.com") {
+          const newUser = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: username,
+            password: createHash(password),
+            adress: req.body.adress,
+            age: req.body.age,
+            cartId: getRandomNumber(),
+            phoneNumber: req.body.codeInt + req.body.phone,
+            whatsApp: req.body.codeInt + "9" + req.body.phone,
+            type: "sistema",
+          };
+          UserModel.create(newUser, (err, userWithId) => {
+            if (err) {
+              return callback(err);
+            }
 
-          logger.info("Registro Satisfactorio");
-          logger.info(userWithId);
-          return callback(null, userWithId);
-        });
+            logger.info("Registro Satisfactorio");
+            logger.info(userWithId);
+            return callback(null, userWithId);
+          });
+        } else {
+          const newUser = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: username,
+            password: createHash(password),
+            adress: req.body.adress,
+            age: req.body.age,
+            cartId: getRandomNumber(),
+            phoneNumber: req.body.codeInt + req.body.phone,
+            whatsApp: req.body.codeInt + "9" + req.body.phone,
+            type: "usuario",
+          };
+          UserModel.create(newUser, (err, userWithId) => {
+            if (err) {
+              return callback(err);
+            }
+
+            logger.info("Registro Satisfactorio");
+            logger.info(userWithId);
+            return callback(null, userWithId);
+          });
+        }
       });
     }
   )
 );
-
 passport.serializeUser((user, callback) => {
   callback(null, user._id);
 });
-
 passport.deserializeUser((id, callback) => {
   UserModel.findById(id, callback);
 });
-
 // Handlebars and middlewares
 app.engine(
   "hbs",
@@ -171,151 +190,53 @@ app.engine(
 
 app.set("view engine", "hbs");
 app.set("views", "./src/views");
-app.use(express.static("./public/assets"));
+app.use(express.static("./public/"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Multer
-const fs = require("fs");
-const multer = require("multer");
-const upload = multer({ dest: "public/assets/" });
-
-//Graphql
-const { graphqlHTTP } = require("express-graphql");
-const { buildSchema } = require("graphql");
-const schema = buildSchema(`
-  type Producto {
-    nombre: String!
-    descripcion: String!
-    codigo: Int!
-    urlIMG: String
-    precio: Int!
-    stock: Int!
+// Socket.io
+const routes = require("./src/controllers/session");
+let email = "";
+let tipo = "";
+app.get("/chat", routes.checkAuthentication, (req, res) => {
+  email = req.user.username;
+  tipo = req.user.type;
+  res.render("chat");
+});
+io.on("connection", (socket) => {
+  console.log("Cliente conectado");
+  let messages = [];
+  async function getMessages() {
+    messages = await messageContainer.getContent();
+    socket.emit("messages", messages);
   }
-  input ProductoInput {
-    nombre: String!
-    descripcion: String!
-    codigo: Int!
-    urlIMG: String
-    precio: Int!
-    stock: Int!
-  }
-  type Query {
-    getProducts: [Producto]
-    getById(id: Int!): Producto
-  }
-  type Mutation {
-    createProduct(datos: ProductoInput): Producto
-    updateProduct(id: Int!, datos: ProductoInput): Producto
-    deleteProduct(id: Int!): Producto
-  }
-`);
+  getMessages();
+  socket.on("new-message", (data) => {
+    let mensaje = {
+      mensaje: data.mensaje,
+      email: email,
+      fecha: data.fecha,
+      hora: data.hora,
+      tipo: tipo,
+    };
+    messageContainer.save(mensaje);
 
-async function getProducts() {
-  let response = await productsContainer.getContent();
-  return response;
-}
-
-async function getById(id) {
-  let response = await productsContainer.getById(id);
-  return response;
-}
-
-async function createProduct(datos) {
-  let response = await productsContainer.save(datos);
-  return response;
-}
-
-async function updateProduct(id, datos) {
-  let response = await productsContainer.editData(id, datos);
-  return response;
-}
-
-async function deleteProduct(id) {
-  let response = await productsContainer.deleteById(id);
-  return response;
-}
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    rootValue: {
-      getProducts,
-      getById,
-      updateProduct,
-      createProduct,
-      deleteProduct,
-    },
-    graphiql: true,
-  })
-);
+    console.log("Mensaje enviado: " + data.mensaje);
+    io.sockets.emit("messages", mensaje);
+  });
+});
 
 // Rutas
+const carritoRouter = require("./src/routes/CartRoutes");
+const productosRouter = require("./src/routes/ProductRoutes");
+const signupRouter = require("./src/routes/signup");
+const loginRouter = require("./src/routes/login");
+const logoutRouter = require("./src/routes/logout");
+const pagesRouter = require("./src/routes/pages");
 
+app.use(pagesRouter);
 app.use("/api/productos", productosRouter);
 app.use("/api/carrito", carritoRouter);
-// Inicio
-
-app.get("/", routes.getRoot);
-
-// Login
-
-app.get("/login", routes.getLogin);
-
-app.post(
-  "/login",
-  passport.authenticate("login", { failureRedirect: "/login" }),
-  routes.postLogin
-);
-
-// Signup
-let linkAvatar = "";
-app.post("/uploadImage", upload.single("myFile"), (req, res) => {
-  fs.renameSync(
-    req.file.path,
-    req.file.path + "." + req.file.mimetype.split("/")[1]
-  );
-  linkAvatar = `${req.file.filename}.jpeg`;
-  res.redirect("/signup");
-});
-
-app.get("/signup", routes.getSignUp);
-
-app.post(
-  "/signup",
-  passport.authenticate("signup", { failureRedirect: "/signup" }),
-  routes.postSignup
-);
-
-// Envio carrito
-
-app.post("/enviar", routes.sendCart);
-
-// LogOut
-
-app.get("/logout", routes.getLogout);
-
-// Home
-
-app.get("/home", routes.checkAuthentication, async (req, res) => {
-  let usuario = req.user.firstName + " " + req.user.lastName;
-  let email = req.user.username;
-  let imagen = req.user.avatar;
-  let products = await productsContainer.getContent();
-  products.forEach((el) => {
-    el.cartId = req.user.cartId;
-  });
-  let productsInCart = await cartContainer.getAllProducts(req.user.cartId);
-  if (productsInCart) {
-    productsInCart.forEach((el) => {
-      el.cartId = req.user.cartId;
-    });
-  }
-  res.render("principal", {
-    usuario: usuario,
-    email: email,
-    avatar: imagen,
-    productos: products,
-    cartProducts: productsInCart,
-  });
-});
+app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
+app.use("/signup", signupRouter);
