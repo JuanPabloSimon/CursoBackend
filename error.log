@@ -1,0 +1,20 @@
+[2022-09-27T20:28:50.288] [ERROR] fileError - Error: invalid_client: The OAuth client was not found.
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}
+[2022-09-27T20:28:50.290] [ERROR] fileError - Error: invalid_client: The OAuth client was not found.
+    at C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:272:33
+    at PassThrough.<anonymous> (C:\Users\Juan Pablo\Desktop\Backend\Proyecto_final_Backend\node_modules\nodemailer\lib\xoauth2\index.js:341:20)
+    at Object.onceWrapper (events.js:519:28)
+    at PassThrough.emit (events.js:400:28)
+    at endReadableNT (internal/streams/readable.js:1317:12)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+  code: 'EAUTH',
+  command: 'AUTH XOAUTH2'
+}

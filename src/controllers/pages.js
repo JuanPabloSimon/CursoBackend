@@ -13,6 +13,18 @@ log4js.configure({
 });
 const logger = log4js.getLogger();
 const loggerError = log4js.getLogger("fileError");
+
+//DOTENV
+const dotenv = require("dotenv");
+const path = require("path");
+const NODE_ENV = process.env.NODE_ENV || "desarrollo";
+dotenv.config({
+  path:
+    NODE_ENV == "production"
+      ? path.resolve(__dirname, "produccion.env")
+      : path.resolve(__dirname, "desarrollo.env"),
+});
+
 //Containers
 
 const { ProductosDaoMongo } = require("../daos/productos/ProductosDaoMongo");
@@ -72,9 +84,23 @@ async function sendCart(req, res) {
   res.redirect("productos");
 }
 
+function getConfig(req, res) {
+  let datos = [
+    { name: "Puerto", value: process.env.PORT },
+    { name: "URLDB", value: process.env.MONGODB_URI },
+    { name: "Tiempo sesion", value: process.env.TIME_SESSION },
+    { name: "Email admin", value: process.env.EMAIL_ADMIN },
+    { name: "Server mode", value: process.env.MODE },
+    { name: "clientID", value: process.env.CLIENT_ID },
+    { name: "clientSecret", value: process.env.CLIENT_SECRET },
+  ];
+  res.render("config", { datos: datos });
+}
+
 module.exports = {
   getRoot,
   sendCart,
   getHome,
   getCart,
+  getConfig,
 };

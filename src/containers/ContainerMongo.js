@@ -23,7 +23,6 @@ const loggerError = log4js.getLogger("fileError");
 
 const dotenv = require("dotenv");
 const path = require("path");
-// const NODE_ENV = process.argv.slice(2)
 const NODE_ENV = process.env.NODE_ENV || "desarrollo";
 dotenv.config({
   path:

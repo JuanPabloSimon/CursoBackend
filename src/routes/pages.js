@@ -13,5 +13,6 @@ pagesRouter.post("/enviar", routes.sendCart);
 // Home
 pagesRouter.get("/productos", routes2.checkAuthentication, routes.getHome);
 pagesRouter.get("/carrito", routes2.checkAuthentication, routes.getCart);
+pagesRouter.get("/config", routes.getConfig);
 
 module.exports = pagesRouter;
