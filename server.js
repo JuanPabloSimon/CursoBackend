@@ -14,7 +14,7 @@ dotenv.config({
       ? path.resolve(__dirname, "produccion.env")
       : path.resolve(__dirname, "desarrollo.env"),
 });
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 const { MensajesDaoMongo } = require("./src/daos/mensajes/MensajesDaoMongo");
 let messageContainer = new MensajesDaoMongo();
