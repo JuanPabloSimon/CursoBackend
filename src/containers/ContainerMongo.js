@@ -35,7 +35,7 @@ const MONGO_URL = process.env.MONGO_URL;
 class ContainerMongo {
   constructor(modelo) {
     mongoose.connect(
-      MONGO_URL,
+      "mongodb://localhost:27017/ecommerce",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
