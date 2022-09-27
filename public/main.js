@@ -2,7 +2,6 @@ const socket = io.connect();
 
 function render(data) {
   let mensajes = data;
-  console.log(data);
   const html = mensajes
     .map((elem) => {
       return `<div id="mensaje">
