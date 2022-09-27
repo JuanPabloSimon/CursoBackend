@@ -30,12 +30,13 @@ dotenv.config({
       ? path.resolve(__dirname, "produccion.env")
       : path.resolve(__dirname, "desarrollo.env"),
 });
-const MONGO_URL = process.env.MONGO_URL;
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce";
 
 class ContainerMongo {
   constructor(modelo) {
     mongoose.connect(
-      "mongodb://localhost:27017/ecommerce",
+      MONGODB_URI,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
