@@ -17,10 +17,10 @@ const loggerError = log4js.getLogger("fileError");
 // DOTENV
 const dotenv = require("dotenv");
 const path = require("path");
-const ENV = process.argv.slice(2);
+const NODE_ENV = process.argv.slice(2);
 dotenv.config({
   path:
-    ENV == "production"
+    NODE_ENV == "production"
       ? path.resolve(__dirname, "produccion.env")
       : path.resolve(__dirname, "desarrollo.env"),
 });
